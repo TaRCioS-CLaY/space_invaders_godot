@@ -1,0 +1,57 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Sprites/background.png" type="Texture" id=1]
+[ext_resource path="res://Nave-1 Cortada.png" type="Texture" id=2]
+[ext_resource path="res://scripts/nave.gd" type="Script" id=3]
+[ext_resource path="res://Alien R.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Game.gd" type="Script" id=6]
+
+[node name="Game" type="Node2D"]
+position = Vector2( 1, -2 )
+script = ExtResource( 6 )
+
+[node name="background" type="Sprite" parent="."]
+position = Vector2( 0, 2 )
+texture = ExtResource( 1 )
+centered = false
+
+[node name="nave" type="Node2D" parent="."]
+position = Vector2( 200, 480 )
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Nave-1 Cortada" type="Sprite" parent="nave"]
+texture = ExtResource( 2 )
+
+[node name="Timer" type="Timer" parent="."]
+
+[node name="Alien R" parent="." instance=ExtResource( 4 )]
+position = Vector2( 207, 104 )
+
+[node name="Alien R3" parent="." instance=ExtResource( 4 )]
+position = Vector2( 342, 105 )
+
+[node name="Alien R4" parent="." instance=ExtResource( 4 )]
+position = Vector2( 58, 102 )
+
+[node name="Alien R2" parent="." instance=ExtResource( 4 )]
+position = Vector2( 207, 167 )
+
+[node name="Alien R5" parent="." instance=ExtResource( 4 )]
+position = Vector2( 342, 168 )
+
+[node name="Alien R6" parent="." instance=ExtResource( 4 )]
+position = Vector2( 58, 165 )
+
+[node name="Alien R7" parent="." instance=ExtResource( 4 )]
+position = Vector2( 208, 229 )
+
+[node name="Alien R8" parent="." instance=ExtResource( 4 )]
+position = Vector2( 343, 230 )
+
+[node name="Alien R9" parent="." instance=ExtResource( 4 )]
+position = Vector2( 59, 227 )
+
+[connection signal="timeout" from="Timer" to="." method="TimerTimeout"]

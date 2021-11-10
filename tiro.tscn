@@ -1,0 +1,50 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Sprites/tiro-Sheet2.png" type="Texture" id=1]
+[ext_resource path="res://scripts/tiro.gd" type="Script" id=2]
+
+[sub_resource type="Animation" id=1]
+resource_name = "tiro mexendo"
+length = 0.715
+loop = true
+step = 0.06
+tracks/0/type = "value"
+tracks/0/path = NodePath("tiro-Sheet2:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.06, 0.12, 0.18, 0.24, 0.3, 0.36, 0.42, 0.48, 0.54, 0.6, 0.66 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 5, 6, 7, 8, 9, 10, 11, 12 ]
+}
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 3.0
+
+[node name="tiro" type="Node2D" groups=["tiros"]]
+script = ExtResource( 2 )
+
+[node name="tiro-Sheet2" type="Sprite" parent="."]
+texture = ExtResource( 1 )
+hframes = 13
+
+[node name="anim" type="AnimationPlayer" parent="."]
+autoplay = "tiro mexendo"
+"anims/tiro mexendo" = SubResource( 1 )
+
+[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
+position = Vector2( 0, -23 )
+scale = Vector2( 0.45, 0.2 )
+
+[node name="area" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 4
+
+[node name="shape" type="CollisionShape2D" parent="area"]
+shape = SubResource( 2 )
+
+[connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]
+[connection signal="area_entered" from="area" to="." method="_on_area_area_entered"]

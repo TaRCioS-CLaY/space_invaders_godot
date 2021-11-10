@@ -1,0 +1,51 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Sprites/Alien R Com brilho-Sheet t.png" type="Texture" id=1]
+[ext_resource path="res://scripts/Alien R.gd" type="Script" id=2]
+
+[sub_resource type="Animation" id=1]
+resource_name = "animacao alien"
+length = 0.95
+loop = true
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("Alien R Com brilho-Sheet t:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.13, 0.26, 0.39, 0.45, 0.65, 0.78 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4, 2, 1 ]
+}
+
+[sub_resource type="CapsuleShape2D" id=2]
+radius = 14.5063
+height = 25.4254
+
+[node name="Alien R" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="Alien R Com brilho-Sheet t" type="Sprite" parent="."]
+texture = ExtResource( 1 )
+hframes = 5
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="anim" type="AnimationPlayer" parent="."]
+autoplay = "animacao alien"
+"anims/animacao alien" = SubResource( 1 )
+
+[node name="area" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 2
+
+[node name="shape" type="CollisionShape2D" parent="area"]
+position = Vector2( -1, 1 )
+rotation = -1.5708
+shape = SubResource( 2 )
+
+[connection signal="area_entered" from="area" to="." method="_on_area_area_entered"]
